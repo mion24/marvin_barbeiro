@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marvin_barbeiro/pages/cliente/clientes/clientes.dart';
 import 'package:marvin_barbeiro/pages/home/componentes/card_resumo_vendas.dart';
 import 'package:marvin_barbeiro/pages/venda/vendas/vendas.dart';
 
@@ -35,13 +36,22 @@ class HomeView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
-            onPressed: (() {}),
+            heroTag: 'clientes',
+            onPressed: (() {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ClientesView(),
+                ),
+              );
+            }),
             child: Icon(Icons.people),
           ),
           SizedBox(
             height: 10,
           ),
           FloatingActionButton(
+            heroTag: 'clientes',
             onPressed: (() {
               Navigator.push(
                 context,
