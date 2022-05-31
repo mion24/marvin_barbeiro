@@ -51,7 +51,7 @@ class HomeView extends StatelessWidget {
             height: 10,
           ),
           FloatingActionButton(
-            heroTag: 'clientes',
+            heroTag: 'vendas',
             onPressed: (() {
               Navigator.push(
                 context,
