@@ -53,8 +53,8 @@ class NovoCliente extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: (() {
-                clientesStore.mesclarCliente(clienteStore);
+              onPressed: (() async {
+                await clientesStore.mesclarCliente(clienteStore);
                 Navigator.pop(context);
               }),
               child: Text("Salvar"),

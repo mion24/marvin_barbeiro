@@ -28,20 +28,34 @@ class ClientesView extends StatelessWidget {
         },
         child: Icon(Icons.add_circle),
       ),
-      body: Observer(
-        builder: ((context) => ListView.builder(
-              itemCount: store.clientes.length,
-              itemBuilder: ((context, index) {
-                final cliente = store.clientes.elementAt(index);
-                return CardCliente(
-                  nome: cliente.nome ?? '',
-                  idade: cliente.idade ?? '',
-                  ufNascimento: cliente.uf ?? '',
-                  email: cliente.email ?? '',
-                );
-              }),
-            )),
-      ),
-    );
+      body: FutureBuilder(future: store.carregarClientes(),
+        builder: ((context, snapshot) {
+        if(snapshot.hasData) {
+          return Observer(
+            builder: ((context) => ListView.builder(
+                  itemCount: store.clientes.length,
+                  itemBuilder: ((context, index) {
+                    final cliente = store.clientes.elementAt(index);
+                    return CardCliente(
+                      nome: cliente.nome ?? '',
+                      idade: cliente.idade ?? '',
+                      ufNascimento: cliente.uf ?? '',
+                      email: cliente.email ?? '',
+                    );
+                  }),
+                )),
+          );
+        } else if(snapshot.hasError) {
+          return Center(
+            child: Text('error: )'),
+          );
+          
+        }else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      })),);
+    
   }
 }
