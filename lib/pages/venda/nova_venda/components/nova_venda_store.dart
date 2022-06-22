@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:marvin_barbeiro/pages/cliente/stores/cliente_store.dart';
 import 'package:marvin_barbeiro/pages/servicos/model/servico_model.dart';
@@ -15,7 +16,11 @@ abstract class _NovaVendaStoreBase with Store {
 
   _NovaVendaStoreBase() {
     definirClienteConsumidor();
+    data = DateTime.now();
   }
+
+  @observable
+  TextEditingController controllerCliente = TextEditingController(text: '');
 
   @observable
   ClienteStore? cliente;
@@ -32,8 +37,19 @@ abstract class _NovaVendaStoreBase with Store {
   DateTime? data;
 
   @action
-  void definirCliente(ClienteStore clienteSelecionado) => cliente = clienteSelecionado; 
-  
+  void definirCliente(ClienteStore clienteSelecionado) { 
+    controllerCliente.text = clienteSelecionado.nome!;
+    cliente = clienteSelecionado; 
+  }
+
+  @action
+  void DefinirNome(String novoNome) { 
+    controllerCliente.text = novoNome;
+    
+    if(cliente != null){
+    cliente!.nome = novoNome; 
+    }
+  }
   @action
   void definirClienteConsumidor() => cliente = ClienteStore(
     nome: 'Consumidor',
