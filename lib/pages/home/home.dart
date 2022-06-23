@@ -11,6 +11,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     final vendasStore = GetIt.I<VendasStore>();
     return Scaffold(
       appBar: AppBar(
@@ -23,20 +24,20 @@ class HomeView extends StatelessWidget {
             builder: (_) {
               return CardResumoVendas(
                 titulo: 'Dia',
-                atendimentos: '22',
+                atendimentos: vendasStore.nClientesDia,
                 valorTotal: vendasStore.vendasDiaValor,
               );
             },
           ),
           CardResumoVendas(
-            titulo: 'Mês',
-            atendimentos: '22',
-            valorTotal: '1',
+            titulo: 'Mes',
+            atendimentos: vendasStore.nClientesMes,
+            valorTotal: vendasStore.vendasMesValor,
           ),
           CardResumoVendas(
             titulo: 'Ano',
-            atendimentos: '22',
-            valorTotal: '1',
+            atendimentos: vendasStore.nClientesAno,
+            valorTotal: vendasStore.vendasMesValor,
           ),
         ],
       ),
